@@ -2,24 +2,27 @@ import React, { useReducer } from 'react';
 import { Link } from 'react-router-dom';
 import reducer from '../reducers/index';
 
-const initialState = {
-	count: 0,
-	data: []
+import ComponentD from './ComponentD';
+
+const initialCount = {
+	count: 0
 };
 
 const ComponentC = () => {
-	const [ state, dispatch ] = useReducer(reducer, initialState);
+	const [ state, dispatch ] = useReducer(reducer, initialCount);
 
 	const increment = () => {
 		dispatch({
 			type: 'INCREMENT'
 		});
 	};
+
 	const decrement = () => {
 		dispatch({
 			type: 'DECREMENT'
 		});
 	};
+
 	const reset = () => {
 		dispatch({
 			type: 'RESET'
@@ -34,6 +37,7 @@ const ComponentC = () => {
 			<button onClick={decrement}>-</button>
 			<button onClick={reset}>reset</button>
 			<h1>{state.count}</h1>
+			<ComponentD />
 		</div>
 	);
 };

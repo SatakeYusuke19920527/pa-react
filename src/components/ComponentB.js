@@ -1,6 +1,6 @@
 import React, { useReducer, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ADD_EVENT } from '../actions/index';
+import { ADD_EVENT, DELETE_ALL_EVENT } from '../actions/index';
 import reducer from '../reducers/index';
 import { Button, Form, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,6 +9,7 @@ const ComponentB = () => {
 	const [ state, dispatch ] = useReducer(reducer, []);
 	const [ title, setTitle ] = useState('');
 	const [ body, setBody ] = useState('');
+	// const [ comment, setComment ] = useState('');
 
 	const handleClick = (e) => {
 		e.preventDefault();
@@ -20,6 +21,14 @@ const ComponentB = () => {
 		setTitle('');
 		setBody('');
 	};
+
+	const deleteAllEvent = (e) => {
+		e.preventDefault();
+		dispatch({
+			type: DELETE_ALL_EVENT
+		});
+	};
+
 	return (
 		<div>
 			<div>ComponentB</div>
@@ -45,8 +54,8 @@ const ComponentB = () => {
 				<Button variant="primary" onClick={handleClick}>
 					イベント作成
 				</Button>
-				<Button variant="danger" onClick={handleClick}>
-					イベント作成
+				<Button variant="danger" onClick={deleteAllEvent}>
+					イベント全削除
 				</Button>
 			</Form>
 			<h1>Table</h1>
@@ -61,13 +70,16 @@ const ComponentB = () => {
 				</thead>
 				<tbody>
 					{state.map((data, index) => {
+						const kdjfkdkd = () => {};
 						return (
 							<tr key={index}>
 								<td>{data.id}</td>
 								<td>{data.title}</td>
 								<td>{data.body}</td>
 								<td>
-									<Button variant="danger">削除</Button>
+									<Button variant="danger" onClick={kdjfkdkd}>
+										削除
+									</Button>
 								</td>
 							</tr>
 						);
